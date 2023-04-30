@@ -1,5 +1,7 @@
 package stepdefinitions;
 
+import java.util.Date;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +28,7 @@ public class Login {
 	
 	@When("User enters valid email address {string} into email field") 
 	public void User_enters_valid_email_address_into_email_field(String emailText) {
-		driver.findElement(By.id("input-email")).sendKeys(emailText);
+		driver.findElement(By.xpath("//input[@id='input-email']")).sendKeys(emailText);
 	}
 	
 	@And("User enters valid password {string} into password field")
@@ -44,9 +46,10 @@ public class Login {
 	   Assert.assertTrue(driver.findElement(By.linkText("Edit your account information")).isDisplayed());
 	}
 
-	@When("User enters invalid email address {string} into email field")
-	public void user_enters_invalid_email_address_into_email_field(String invalidEmailText) {
-		driver.findElement(By.id("input-email")).sendKeys(invalidEmailText);
+	@When("User enters invalid email address into email field")
+	public void user_enters_invalid_email_address_into_email_field() {
+		
+		driver.findElement(By.id("input-email")).sendKeys(getEmailWithTimeStamp());
 	}
 
 	@When("User enters invalid password {string} into password field")
@@ -69,4 +72,8 @@ public class Login {
 		driver.findElement(By.id("input-password")).sendKeys("");
 	}
 
+	private String getEmailWithTimeStamp() {
+		Date date = new Date();
+		return "sureshm"+date.toString().replace(" ", "_").replace(":", "_")+"@gmail.com";
+	}
 }

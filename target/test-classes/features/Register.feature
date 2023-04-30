@@ -5,7 +5,6 @@ Given User navigates to Register Account page
 When User enters the details into below fields
 |firstName  |suresh               |
 |lastName   |m                    |
-|email      |sureshm434@gmail.com |
 |telephone  | 1234546787          |
 |password   | sureshm@434         |
 And User selects Privacy Policy
@@ -17,7 +16,6 @@ Given User navigates to Register Account page
 When User enters the details into below fields
 |firstName  |suresh               |
 |lastName   |m                    |
-|email      |sureshm434@gmail.com |
 |telephone  | 1234546787          |
 |password   | sureshm@434         |
 And User selects Yes for Newsletter
@@ -27,7 +25,7 @@ Then User account should created successfully
 
 Scenario: User creates a duplicate account
 Given User navigates to Register Account page
-When User enters the details into below fields
+When User enters the details into below fields with duplicate email
 |firstName  |suresh               |
 |lastName   |m                    |
 |email      |sureshm434@gmail.com |
