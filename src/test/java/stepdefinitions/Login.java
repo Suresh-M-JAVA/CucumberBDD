@@ -15,65 +15,73 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.types.Duration;
 import junit.framework.Assert;
+import pages.AccountPage;
+import pages.HomePage;
+import pages.LoginPage;
+import utils.CommonUtils;
 
 public class Login {
 	WebDriver driver;
+	private LoginPage loginpage;
+	private HomePage homepage;
+	private AccountPage accountpage;
 	
 	@Given("User navigates to login page")
 	public void User_navigates_to_login_page() {
 		driver = Driverfactory.getDriver();
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Login")).click();
+		homepage = new HomePage(driver);
+		homepage.clickOnMyAccount();
+		homepage.selectLoginOption();
 	}
 	
 	@When("User enters valid email address {string} into email field") 
 	public void User_enters_valid_email_address_into_email_field(String emailText) {
-		driver.findElement(By.xpath("//input[@id='input-email']")).sendKeys(emailText);
+		loginpage = new LoginPage(driver);
+		loginpage.enterEmailAddress(emailText);
 	}
 	
 	@And("User enters valid password {string} into password field")
 	public void user_enters_valid_password_into_password_field(String passwordText) {
-		driver.findElement(By.id("input-password")).sendKeys(passwordText);
+		loginpage.enterPassword(passwordText);
 	}
 
 	@And("User clicks on Login button")
 	public void user_clicks_on_login_button() {
-	    driver.findElement(By.xpath("//input[@value='Login']")).click();	
+		loginpage.clickOnLoginButton();	
 	}
 
 	@Then("User should get successfully logged in")
 	public void user_should_get_successfully_logged_in() {
-	   Assert.assertTrue(driver.findElement(By.linkText("Edit your account information")).isDisplayed());
+		accountpage = new AccountPage(driver);
+		Assert.assertTrue(accountpage.displayStatusOfEditYourAccountInfoOption());
 	}
 
 	@When("User enters invalid email address into email field")
 	public void user_enters_invalid_email_address_into_email_field() {
-		
-		driver.findElement(By.id("input-email")).sendKeys(getEmailWithTimeStamp());
+		loginpage = new LoginPage(driver);
+		loginpage.enterEmailAddress(CommonUtils.getEmailWithTimeStamp());
 	}
 
 	@When("User enters invalid password {string} into password field")
 	public void user_enters_invalid_password_into_password_field(String invalidPasswordText) {
-		driver.findElement(By.id("input-password")).sendKeys(invalidPasswordText);
+		loginpage.enterPassword(invalidPasswordText);
 	}
 
 	@Then("User should get a proper warning message about credentials mismatch")
 	public void user_should_get_a_proper_warning_message_about_credentials_mismatch() {
-	   Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]")).getText().contains("Warning: No match for E-Mail Address and/or Password."));
+	   Assert.assertTrue(loginpage.getWarningMessageText().contains("Warning: No match for E-Mail Address and/or Password."));
 	}
 
 	@When("User dont enter email address into email field")
 	public void user_dont_enter_email_address_into_email_field() {
-		driver.findElement(By.id("input-email")).sendKeys("");
+		loginpage = new LoginPage(driver);
+		loginpage.enterEmailAddress("");
 	}
 
 	@When("User dont enter password into password field")
 	public void user_dont_enter_password_into_password_field() {
-		driver.findElement(By.id("input-password")).sendKeys("");
+		loginpage.enterPassword("");
 	}
 
-	private String getEmailWithTimeStamp() {
-		Date date = new Date();
-		return "sureshm"+date.toString().replace(" ", "_").replace(":", "_")+"@gmail.com";
-	}
+	
 }

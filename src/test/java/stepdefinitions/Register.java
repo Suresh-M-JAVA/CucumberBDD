@@ -12,15 +12,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import pages.HomePage;
+import pages.RegisterPage;
 
 public class Register {
 	WebDriver driver;
+	HomePage homepage; 
 	
 	@Given("User navigates to Register Account page")
 	public void user_navigates_to_register_account_page() {
 		driver = Driverfactory.getDriver();
-		driver.findElement(By.xpath("//span[text()='My Account']")).click();
-		driver.findElement(By.linkText("Register")).click();
+		homepage = new HomePage(driver);
+		homepage.clickOnMyAccount();
+		homepage.selectRegisterOption();
 	}
 
 	@When("User enters the details into below fields")
@@ -28,8 +32,11 @@ public class Register {
 	   
 		Map<String,String> dataMap = dataTable.asMap(String.class, String.class);
 		
-		driver.findElement(By.id("input-firstname")).sendKeys(dataMap.get("firstName"));
-		driver.findElement(By.id("input-lastname")).sendKeys(dataMap.get("lastName"));
+		RegisterPage registerpage = new RegisterPage(driver);
+		registerpage.enterFirstName(dataMap.get("firstName"));
+		registerpage.enterLastName(dataMap.get("lastName"));
+		
+		
 		driver.findElement(By.id("input-email")).sendKeys(getEmailWithTimeStamp());
 		driver.findElement(By.id("input-telephone")).sendKeys(dataMap.get("telephone"));
 		driver.findElement(By.id("input-password")).sendKeys(dataMap.get("password"));
