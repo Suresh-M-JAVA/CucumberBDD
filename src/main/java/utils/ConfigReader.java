@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ConfigReader {
 
-	public static Properties initializeProperties() throws IOException {
+	public Properties initializeProperties() throws IOException {
 		
 		Properties prop = new Properties();
 		File propFile = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\config\\config.properties");

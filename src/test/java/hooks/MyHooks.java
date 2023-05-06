@@ -13,11 +13,14 @@ import utils.ConfigReader;
 
 public class MyHooks {
 WebDriver driver;
+private ConfigReader ConfigReader;
+private Driverfactory Driverfactory; 
 	
 	@Before
 	public void setup() throws IOException {
-		
+		ConfigReader = new ConfigReader();
 		Properties prop = ConfigReader.initializeProperties();
+		Driverfactory = new Driverfactory();
 		driver = Driverfactory.initializeBrowser(prop.getProperty("browser"));
 		driver.get(prop.getProperty("url"));
 	}

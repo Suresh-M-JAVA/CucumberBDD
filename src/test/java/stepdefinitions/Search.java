@@ -14,9 +14,11 @@ public class Search {
 	WebDriver driver;
 	private HomePage homepage;
 	private SearchResultsPage searchresultspage;
+	private Driverfactory Driverfactory;
 	
 	@Given("User opens the Application")
 	public void user_opens_the_application() {
+		Driverfactory = new Driverfactory();
 	    driver = Driverfactory.getDriver();
 	}
 

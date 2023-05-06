@@ -22,9 +22,12 @@ public class Register {
 	private HomePage homepage; 
 	private RegisterPage registerpage;
 	private AccounSuccessPage accountsuccesspage; 
+	private CommonUtils CommonUtils;
+	private Driverfactory Driverfactory;
 	
 	@Given("User navigates to Register Account page")
 	public void user_navigates_to_register_account_page() {
+		Driverfactory = new Driverfactory();
 		driver = Driverfactory.getDriver();
 		homepage = new HomePage(driver);
 		homepage.clickOnMyAccount();
@@ -38,6 +41,7 @@ public class Register {
 		
 		registerpage.enterFirstName(dataMap.get("firstName"));
 		registerpage.enterLastName(dataMap.get("lastName"));
+		CommonUtils = new CommonUtils();
 		registerpage.enterEmailAddress(CommonUtils.getEmailWithTimeStamp());
 		registerpage.enterTelephone(dataMap.get("telephone"));
 		registerpage.enterPasssword(dataMap.get("password"));

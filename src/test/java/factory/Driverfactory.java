@@ -15,7 +15,7 @@ public class Driverfactory {
 
 	static WebDriver driver=null;
 	
-	public static WebDriver initializeBrowser(String BrowserName) throws IOException {
+	public WebDriver initializeBrowser(String BrowserName) throws IOException {
 		
 		
 		if(BrowserName.equals("chrome")) {
@@ -33,7 +33,7 @@ public class Driverfactory {
 		return driver;
 	}
 	
-	public static WebDriver getDriver() {
+	public WebDriver getDriver() {
 		return driver;
 	}
 }

@@ -25,9 +25,12 @@ public class Login {
 	private LoginPage loginpage;
 	private HomePage homepage;
 	private AccountPage accountpage;
+	private CommonUtils CommonUtils;
+	private Driverfactory Driverfactory;
 	
 	@Given("User navigates to login page")
 	public void User_navigates_to_login_page() {
+		Driverfactory = new Driverfactory();
 		driver = Driverfactory.getDriver();
 		homepage = new HomePage(driver);
 		homepage.clickOnMyAccount();
@@ -56,6 +59,7 @@ public class Login {
 
 	@When("User enters invalid email address into email field")
 	public void user_enters_invalid_email_address_into_email_field() {
+		CommonUtils = new CommonUtils(); 
 		loginpage.enterEmailAddress(CommonUtils.getEmailWithTimeStamp());
 	}
 
