@@ -23,6 +23,12 @@ public class HomePage {
 	@FindBy(linkText = "Register")
 	private WebElement registerOption;
 	
+	@FindBy(name = "search")
+	private WebElement searchBoxField;
+	
+	@FindBy(xpath =  "//button[contains(@class,'btn-default')]")
+	private WebElement searchButton;
+
 	public void clickOnMyAccount() {
 		myAccountDropMenu.click();
 	}
@@ -33,5 +39,13 @@ public class HomePage {
 	
 	public void selectRegisterOption() {
 		registerOption.click();
+	}
+	
+	public void enterProductintoSearchBox(String ProductText) {
+		searchBoxField.sendKeys(ProductText);;
+	}
+	
+	public void clickOnSearchButton() {
+		searchButton.click();
 	}
 }
