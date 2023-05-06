@@ -30,8 +30,7 @@ public class Login {
 	
 	@Given("User navigates to login page")
 	public void User_navigates_to_login_page() {
-		Driverfactory = new Driverfactory();
-		driver = Driverfactory.getDriver();
+		driver = new Driverfactory().getDriver();
 		homepage = new HomePage(driver);
 		homepage.clickOnMyAccount();
 		loginpage = homepage.selectLoginOption();
