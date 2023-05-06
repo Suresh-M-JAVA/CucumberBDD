@@ -19,16 +19,16 @@ import utils.CommonUtils;
 
 public class Register {
 	WebDriver driver;
-	HomePage homepage; 
-	RegisterPage registerpage;
-	AccounSuccessPage accountsuccesspage; 
+	private HomePage homepage; 
+	private RegisterPage registerpage;
+	private AccounSuccessPage accountsuccesspage; 
 	
 	@Given("User navigates to Register Account page")
 	public void user_navigates_to_register_account_page() {
 		driver = Driverfactory.getDriver();
 		homepage = new HomePage(driver);
 		homepage.clickOnMyAccount();
-		homepage.selectRegisterOption();
+		registerpage = homepage.selectRegisterOption();
 	}
 
 	@When("User enters the details into below fields")
@@ -36,12 +36,12 @@ public class Register {
 	   
 		Map<String,String> dataMap = dataTable.asMap(String.class, String.class);
 		
-		registerpage = new RegisterPage(driver);
 		registerpage.enterFirstName(dataMap.get("firstName"));
 		registerpage.enterLastName(dataMap.get("lastName"));
 		registerpage.enterEmailAddress(CommonUtils.getEmailWithTimeStamp());
 		registerpage.enterTelephone(dataMap.get("telephone"));
 		registerpage.enterPasssword(dataMap.get("password"));
+		registerpage.enterConfirmPasssword(dataMap.get("password"));
 	
 	}
 
@@ -50,12 +50,12 @@ public class Register {
 	   
 		Map<String,String> dataMap = dataTable.asMap(String.class, String.class);
 		
-		registerpage = new RegisterPage(driver);
 		registerpage.enterFirstName(dataMap.get("firstName"));
 		registerpage.enterLastName(dataMap.get("lastName"));
 		registerpage.enterEmailAddress(dataMap.get("email"));
 		registerpage.enterTelephone(dataMap.get("telephone"));
 		registerpage.enterPasssword(dataMap.get("password"));
+		registerpage.enterConfirmPasssword(dataMap.get("password"));
 	}
 	
 	@When("User selects Privacy Policy")
@@ -65,12 +65,11 @@ public class Register {
 
 	@When("User clicks on Continue button")
 	public void user_clicks_on_continue_button() {
-		registerpage.clicksContinueButton();
+	accountsuccesspage = registerpage.clicksContinueButton();
 	}
 
 	@Then("User account should created successfully")
 	public void user_account_should_created_successfully() {
-		accountsuccesspage = new AccounSuccessPage(driver);
 	   Assert.assertEquals("Your Account Has Been Created!", accountsuccesspage.getPageHeading());
 	}
 
@@ -86,7 +85,12 @@ public class Register {
 
 	@When("User dont enter any details into fields")
 	public void user_dont_enter_any_details_into_fields() {
-	  registerpage = new RegisterPage(driver);
+		registerpage.enterFirstName("");
+		registerpage.enterLastName("");
+		registerpage.enterEmailAddress("");
+		registerpage.enterTelephone("");
+		registerpage.enterPasssword("");
+		registerpage.enterConfirmPasssword("");
 	}
 
 	@Then("User should get proper warning messages for every mandatory fields")

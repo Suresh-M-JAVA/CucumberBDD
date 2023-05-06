@@ -31,12 +31,11 @@ public class Login {
 		driver = Driverfactory.getDriver();
 		homepage = new HomePage(driver);
 		homepage.clickOnMyAccount();
-		homepage.selectLoginOption();
+		loginpage = homepage.selectLoginOption();
 	}
 	
 	@When("User enters valid email address {string} into email field") 
 	public void User_enters_valid_email_address_into_email_field(String emailText) {
-		loginpage = new LoginPage(driver);
 		loginpage.enterEmailAddress(emailText);
 	}
 	
@@ -47,18 +46,16 @@ public class Login {
 
 	@And("User clicks on Login button")
 	public void user_clicks_on_login_button() {
-		loginpage.clickOnLoginButton();	
+	accountpage = loginpage.clickOnLoginButton();	
 	}
 
 	@Then("User should get successfully logged in")
 	public void user_should_get_successfully_logged_in() {
-		accountpage = new AccountPage(driver);
 		Assert.assertTrue(accountpage.displayStatusOfEditYourAccountInfoOption());
 	}
 
 	@When("User enters invalid email address into email field")
 	public void user_enters_invalid_email_address_into_email_field() {
-		loginpage = new LoginPage(driver);
 		loginpage.enterEmailAddress(CommonUtils.getEmailWithTimeStamp());
 	}
 
@@ -74,7 +71,6 @@ public class Login {
 
 	@When("User dont enter email address into email field")
 	public void user_dont_enter_email_address_into_email_field() {
-		loginpage = new LoginPage(driver);
 		loginpage.enterEmailAddress("");
 	}
 

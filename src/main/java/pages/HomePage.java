@@ -33,19 +33,22 @@ public class HomePage {
 		myAccountDropMenu.click();
 	}
 	
-	public void selectLoginOption() {
+	public LoginPage selectLoginOption() {
 		LoginOption.click();
+		return new LoginPage(driver);
 	}
 	
-	public void selectRegisterOption() {
+	public RegisterPage selectRegisterOption() {
 		registerOption.click();
+		return new RegisterPage(driver);
 	}
 	
 	public void enterProductintoSearchBox(String ProductText) {
 		searchBoxField.sendKeys(ProductText);;
 	}
 	
-	public void clickOnSearchButton() {
+	public SearchResultsPage clickOnSearchButton() {
 		searchButton.click();
+		return new SearchResultsPage(driver);
 	}
 }

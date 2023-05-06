@@ -68,27 +68,28 @@ WebDriver driver;
 	}
 	
 	public void enterEmailAddress(String emailText) {
-		lastNameField.sendKeys(emailText);
+		emailField.sendKeys(emailText);
 	}
 	
 	public void enterTelephone(String telephoneText) {
-		lastNameField.sendKeys(telephoneText);
+		telephoneField.sendKeys(telephoneText);
 	}
 	
 	public void enterPasssword(String passwordText) {
-		lastNameField.sendKeys(passwordText);
+		passwordField.sendKeys(passwordText);
 	}
 	
 	public void enterConfirmPasssword(String confirmpasswordText) {
-		lastNameField.sendKeys(confirmpasswordText);
+		confirmpasswordField.sendKeys(confirmpasswordText);
 	}
 	
 	public void selectPrivacyPolicy() {
 		privacyPolicyOption.click();
 	}
 	
-	public void clicksContinueButton() {
+	public AccounSuccessPage clicksContinueButton() {
 		continueButton.click();
+		return new AccounSuccessPage(driver);
 	}
 	
 	public void selectYesNewsLetterOption() {

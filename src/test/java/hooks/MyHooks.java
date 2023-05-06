@@ -18,11 +18,7 @@ WebDriver driver;
 	public void setup() throws IOException {
 		
 		Properties prop = ConfigReader.initializeProperties();
-		Driverfactory.initializeBrowser(prop.getProperty("browser"));
-		driver = Driverfactory.getDriver();
-		driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+		driver = Driverfactory.initializeBrowser(prop.getProperty("browser"));
 		driver.get(prop.getProperty("url"));
 	}
 
