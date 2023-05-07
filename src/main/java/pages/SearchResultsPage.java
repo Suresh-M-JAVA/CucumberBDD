@@ -5,13 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utils.CommonUtils;
+import utils.ElementUtils;
+
 public class SearchResultsPage {
 
 WebDriver driver;
-	
+private ElementUtils elementUtils;
+
 	public SearchResultsPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		elementUtils = new ElementUtils(driver);
 	}
 	
 	@FindBy(linkText = "HP LP3065")
@@ -21,10 +26,10 @@ WebDriver driver;
 	private WebElement invalidProductMessage;
 	
 	public boolean displayStatusOfValidProduct() {
-		return validHPProduct.isDisplayed();
+		return elementUtils.displayStatusOfElement(validHPProduct, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getInValidProductMessage() {
-		return invalidProductMessage.getText();
+		return elementUtils.getTextFromElement(invalidProductMessage, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 }

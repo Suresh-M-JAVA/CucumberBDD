@@ -1,6 +1,7 @@
 package factory;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import utils.CommonUtils;
 import utils.ConfigReader;
 
 public class Driverfactory {
@@ -29,7 +31,8 @@ public class Driverfactory {
 		}
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(CommonUtils.PAGE_LOAD_TIME));
+		driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(CommonUtils.IMPLICI_WAIT_TIME));
 		return driver;
 	}
 	

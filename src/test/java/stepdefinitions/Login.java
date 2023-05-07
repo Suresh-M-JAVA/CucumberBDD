@@ -36,12 +36,12 @@ public class Login {
 		loginpage = homepage.selectLoginOption();
 	}
 	
-	@When("User enters valid email address {string} into email field") 
+	@When("^User enters valid email address (.+) into email field$") 
 	public void User_enters_valid_email_address_into_email_field(String emailText) {
 		loginpage.enterEmailAddress(emailText);
 	}
 	
-	@And("User enters valid password {string} into password field")
+	@And("^User enters valid password (.+) into password field$")
 	public void user_enters_valid_password_into_password_field(String passwordText) {
 		loginpage.enterPassword(passwordText);
 	}

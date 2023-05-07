@@ -5,13 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utils.CommonUtils;
+import utils.ElementUtils;
+
 public class RegisterPage {
 
 WebDriver driver;
+private ElementUtils elementUtils;
 	
 	public RegisterPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		elementUtils = new ElementUtils(driver);
 	}
 	
 	@FindBy(id = "input-firstname")
@@ -60,63 +65,63 @@ WebDriver driver;
 	private WebElement passwordwarning;
 	
 	public void enterFirstName(String firstNameText) {
-		firstNameField.sendKeys(firstNameText);
+		elementUtils.typeTextIntoElement(firstNameField, firstNameText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME); 
 	}
 	
 	public void enterLastName(String lastNameText) {
-		lastNameField.sendKeys(lastNameText);
+		elementUtils.typeTextIntoElement(lastNameField, lastNameText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public void enterEmailAddress(String emailText) {
-		emailField.sendKeys(emailText);
+		elementUtils.typeTextIntoElement(emailField, emailText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public void enterTelephone(String telephoneText) {
-		telephoneField.sendKeys(telephoneText);
+		elementUtils.typeTextIntoElement(telephoneField, telephoneText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public void enterPasssword(String passwordText) {
-		passwordField.sendKeys(passwordText);
+		elementUtils.typeTextIntoElement(passwordField, passwordText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public void enterConfirmPasssword(String confirmpasswordText) {
-		confirmpasswordField.sendKeys(confirmpasswordText);
+		elementUtils.typeTextIntoElement(confirmpasswordField, confirmpasswordText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public void selectPrivacyPolicy() {
-		privacyPolicyOption.click();
+		elementUtils.clickOnElement(privacyPolicyOption, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public AccounSuccessPage clicksContinueButton() {
-		continueButton.click();
+		elementUtils.clickOnElement(continueButton, CommonUtils.EXPLICIT_WAIT_BASIC_TIME); 
 		return new AccounSuccessPage(driver);
 	}
 	
 	public void selectYesNewsLetterOption() {
-		yesNewsLetterOption.click();
+		elementUtils.clickOnElement(yesNewsLetterOption, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getWarningMessageText() {
-		return warningMessage.getText();
+		return elementUtils.getTextFromElement(warningMessage, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getfirstNameWarning() {
-		return firstNamewarning.getText();
+		return elementUtils.getTextFromElement(firstNamewarning, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getlastNameWarning() {
-		return lastNamewarning.getText();
+		return elementUtils.getTextFromElement(lastNamewarning, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getemailWarning() {
-		return emailwarning.getText();
+		return elementUtils.getTextFromElement(emailwarning, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String gettelephoneWarning() {
-		return telephonewarning.getText();
+		return elementUtils.getTextFromElement(telephonewarning, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public String getpasswordWarning() {
-		return passwordwarning.getText();
+		return elementUtils.getTextFromElement(passwordwarning, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 }

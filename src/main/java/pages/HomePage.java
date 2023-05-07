@@ -5,13 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utils.CommonUtils;
+import utils.ElementUtils;
+
 public class HomePage {
 
 	WebDriver driver;
+	private ElementUtils elementUtils;
 	
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		elementUtils = new ElementUtils(driver);
 	}
 	
 	@FindBy(xpath = "//span[text()='My Account']")
@@ -30,25 +35,25 @@ public class HomePage {
 	private WebElement searchButton;
 
 	public void clickOnMyAccount() {
-		myAccountDropMenu.click();
+		elementUtils.clickOnElement(myAccountDropMenu, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);;
 	}
 	
 	public LoginPage selectLoginOption() {
-		LoginOption.click();
+		elementUtils.clickOnElement(LoginOption, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 		return new LoginPage(driver);
 	}
 	
 	public RegisterPage selectRegisterOption() {
-		registerOption.click();
+		elementUtils.clickOnElement(registerOption, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 		return new RegisterPage(driver);
 	}
 	
 	public void enterProductintoSearchBox(String ProductText) {
-		searchBoxField.sendKeys(ProductText);;
+		elementUtils.typeTextIntoElement(searchBoxField, ProductText, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 	}
 	
 	public SearchResultsPage clickOnSearchButton() {
-		searchButton.click();
+		elementUtils.clickOnElement(searchButton, CommonUtils.EXPLICIT_WAIT_BASIC_TIME);
 		return new SearchResultsPage(driver);
 	}
 }
